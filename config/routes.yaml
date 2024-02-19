@@ -1,3 +1,6 @@
-#index:
+index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+#  a decommenter ainsi que les deux lignes suivantes si besoin
+    #path : /api/articles
+    #controller: App\Controller\Api\ArticleController::article
