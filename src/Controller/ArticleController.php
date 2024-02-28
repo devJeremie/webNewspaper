@@ -12,14 +12,14 @@ class ArticleController extends AbstractController
 {
     
     /**
-     * @Route("/api/articles", name="app_articles", methods: {"GET"})
+     * @Route("/article", name="app_article", methods: {"GET"})
      */
-    public function article(ArticleRepository $articleRepo) : JsonResponse { 
+    public function article() : Response { 
 
-        $articles = $articleRepo->findAll();
 
         return $this->json ([
-            'articles' => $articles
+            'message' => 'Welcome to your new controller!',
+            'path' => 'src/Controller/ArticleController.php',
         ]);
 
         
