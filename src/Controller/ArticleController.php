@@ -7,30 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class ArticleController extends AbstractController
 {
     
     /**
-     * @Route("/article", name="app_article", methods: {"GET"})
+     * @Route("/api/articles", name="app_articles", methods: {"GET"})
      */
-    public function article() : Response { 
-
-
-        return $this->json ([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ArticleController.php',
-        ]);
-
+    public function article(ArticleRepository $articleRepo, SerializerInterface $serializer) : JsonResponse { 
         
+        $articleList = $articleRepo->findAll();
+        $jsonArticleList = $serializer->serialize($articleList, "json");
 
-        /* public function article(): Response
-    {
-    
-        /*return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
-        ]);*/
-        
-   // }
+        return new JsonResponse(
+            $jsonArticleList, Response::HTTP_OK, [], true
+        );
     }
 }
